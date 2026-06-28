@@ -23,7 +23,6 @@
   --radius: 8px;
 }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
 .container { max-width: 860px; margin: 0 auto; padding: 32px 20px; }
 header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
 header h1 { font-size: 16px; font-weight: 500; color: var(--text); letter-spacing: -0.01em; }
@@ -35,9 +34,7 @@ header h1 { font-size: 16px; font-weight: 500; color: var(--text); letter-spacin
 .sync-dot.error { background: #ef4444; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 .header-right { display: flex; align-items: center; gap: 12px; }
-
 .app { display: grid; grid-template-columns: 280px 1fr; gap: 20px; }
-
 .cal-card { background: var(--surface); border-radius: 12px; border: 0.5px solid var(--border); padding: 18px; }
 .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .cal-nav { background: none; border: 0.5px solid var(--border); border-radius: var(--radius); width: 28px; height: 28px; cursor: pointer; font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; }
@@ -51,47 +48,41 @@ header h1 { font-size: 16px; font-weight: 500; color: var(--text); letter-spacin
 .cal-day.selected { border-color: var(--accent); }
 .cal-day.has-entry::after { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); position: absolute; bottom: 4px; }
 .cal-day.empty { cursor: default; pointer-events: none; }
-
 .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .stat-card { background: var(--surface-2); border-radius: var(--radius); padding: 10px; }
+.stat-clickable { cursor: pointer; transition: background 0.1s; }
+.stat-clickable:hover { background: #e8e8e5; }
 .stat-label { font-size: 10px; color: var(--text-muted); margin-bottom: 2px; }
 .stat-num { font-size: 20px; font-weight: 500; }
-
 .right-panel { display: flex; flex-direction: column; gap: 10px; }
 .date-label { font-size: 12px; color: var(--text-muted); font-weight: 500; letter-spacing: 0.04em; padding: 4px 0; }
 .no-entry { background: var(--surface); border-radius: 12px; border: 0.5px solid var(--border); padding: 32px; text-align: center; font-size: 13px; color: var(--text-muted); }
 .entry-card { background: var(--surface); border-radius: 12px; border: 0.5px solid var(--border); padding: 16px; }
 .entry-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
 .entry-title { font-size: 14px; font-weight: 500; }
-.entry-del { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 15px; padding: 0; flex-shrink: 0; line-height: 1; }
+.entry-del, .entry-edit { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 15px; padding: 0; flex-shrink: 0; line-height: 1; }
 .entry-del:hover { color: var(--danger); }
+.entry-edit:hover { color: var(--accent); }
 .entry-body { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 10px; white-space: pre-wrap; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
 .tag { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 500; }
 .add-btn { background: var(--surface); border: 0.5px dashed var(--border-strong); border-radius: 10px; padding: 12px; cursor: pointer; font-size: 13px; color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; }
 .add-btn:hover { background: var(--surface-2); color: var(--text-secondary); }
-
-/* Modal */
 .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 100; }
 .modal { background: var(--surface); border-radius: 14px; border: 0.5px solid var(--border); padding: 22px; width: 340px; max-height: 85vh; overflow-y: auto; }
 .modal-title { font-size: 15px; font-weight: 500; margin-bottom: 16px; }
 .section-label { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-bottom: 6px; }
-.modal input[type=text], .modal textarea {
-  width: 100%; padding: 8px 10px; border: 0.5px solid var(--border-strong); border-radius: var(--radius);
-  font-size: 13px; font-family: inherit; background: var(--bg); color: var(--text); margin-bottom: 12px; outline: none;
-}
+.modal input[type=text], .modal textarea { width: 100%; padding: 8px 10px; border: 0.5px solid var(--border-strong); border-radius: var(--radius); font-size: 13px; font-family: inherit; background: var(--bg); color: var(--text); margin-bottom: 12px; outline: none; }
 .modal input[type=text]:focus, .modal textarea:focus { border-color: var(--accent); }
 .modal textarea { min-height: 80px; resize: vertical; }
 .tag-select { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
-.tag-opt { font-size: 11px; padding: 3px 9px; border-radius: 20px; cursor: pointer; border: 0.5px solid var(--border-strong); background: var(--surface-2); color: var(--text-secondary); transition: outline 0.1s; font-weight: 500; }
+.tag-opt { font-size: 11px; padding: 3px 9px; border-radius: 20px; cursor: pointer; border: 0.5px solid var(--border-strong); background: var(--surface-2); color: var(--text-secondary); font-weight: 500; }
 .tag-opt.selected { outline: 2.5px solid var(--text); outline-offset: 1px; }
 .modal-btns { display: flex; gap: 8px; justify-content: flex-end; }
 .btn-cancel { font-size: 13px; padding: 7px 14px; border: 0.5px solid var(--border-strong); border-radius: var(--radius); background: none; cursor: pointer; color: var(--text-secondary); }
 .btn-cancel:hover { background: var(--surface-2); }
 .btn-save { font-size: 13px; padding: 7px 14px; border: 0.5px solid var(--accent-border); border-radius: var(--radius); background: var(--accent-bg); color: var(--accent); cursor: pointer; font-weight: 500; }
 .btn-save:hover { background: #dbeafe; }
-
-/* Category settings */
 .cat-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
 .cat-row { display: flex; align-items: center; gap: 6px; }
 .cat-row input[type=text] { flex: 1; margin: 0; }
@@ -103,10 +94,13 @@ header h1 { font-size: 16px; font-weight: 500; color: var(--text); letter-spacin
 .color-picker-row { display: flex; flex-wrap: wrap; gap: 5px; padding: 6px 0 6px 28px; }
 .color-swatch { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
 .color-swatch.chosen { border-color: #1a1a18; }
-
-@media (max-width: 600px) {
-  .app { grid-template-columns: 1fr; }
-}
+.stat-row-item { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:0.5px solid var(--border); }
+.stat-row-item:last-child { border-bottom:none; }
+.stat-row-date { font-size:11px; color:var(--text-muted); white-space:nowrap; padding-top:2px; min-width:52px; }
+.stat-row-content { flex:1; min-width:0; }
+.stat-row-title { font-size:13px; font-weight:500; margin-bottom:4px; }
+.stat-row-tags { display:flex; flex-wrap:wrap; gap:4px; }
+@media (max-width: 600px) { .app { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -128,9 +122,9 @@ header h1 { font-size: 16px; font-weight: 500; color: var(--text); letter-spacin
         </div>
         <div class="cal-grid" id="cal-grid"></div>
         <div class="stats-row">
-          <div class="stat-card"><div class="stat-label">이번 달</div><div class="stat-num" id="stat-month">—</div></div>
-          <div class="stat-card"><div class="stat-label">이번 주</div><div class="stat-num" id="stat-week">—</div></div>
-          <div class="stat-card"><div class="stat-label">전체</div><div class="stat-num" id="stat-total">—</div></div>
+          <div class="stat-card stat-clickable" id="stat-card-month"><div class="stat-label">이번 달</div><div class="stat-num" id="stat-month">—</div></div>
+          <div class="stat-card stat-clickable" id="stat-card-week"><div class="stat-label">이번 주</div><div class="stat-num" id="stat-week">—</div></div>
+          <div class="stat-card stat-clickable" id="stat-card-total"><div class="stat-label">전체</div><div class="stat-num" id="stat-total">—</div></div>
         </div>
       </div>
     </div>
@@ -139,20 +133,15 @@ header h1 { font-size: 16px; font-weight: 500; color: var(--text); letter-spacin
     </div>
   </div>
 </div>
-
 <script>
-const SUPABASE_URL = 'https://gnfujfkqxlcjsspnnafa.supabase.co';
+  const SUPABASE_URL = 'https://gnfujfkqxlcjsspnnafa.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImduZnVqZmtxeGxjanNzcG5uYWZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2Mjk4NTYsImV4cCI6MjA5ODIwNTg1Nn0.Kv6tN5XFptJZWrS6x4t7--thDvdd7A8cpb1WcWXSS4I';
 const H = { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` };
-
 const DOWS = ['일','월','화','수','목','금','토'];
 const today = new Date();
 let curYear = today.getFullYear(), curMonth = today.getMonth();
 let selectedDate = toKey(today);
-let modal = null;
-let categories = [];
-let data = {};
-
+let modal = null, categories = [], data = {};
 const PALETTE = [
   { bg:'#EEF2FF', text:'#4338CA', border:'#C7D2FE' },
   { bg:'#EFF6FF', text:'#1D4ED8', border:'#BFDBFE' },
@@ -163,7 +152,6 @@ const PALETTE = [
   { bg:'#ECFDF5', text:'#065F46', border:'#A7F3D0' },
   { bg:'#FFFBEB', text:'#B45309', border:'#FDE68A' },
 ];
-
 const DEFAULT_CATS = [
   {id:'drama',label:'드라마 개발',color:0,sort_order:0},
   {id:'idol',label:'아이돌 개발',color:4,sort_order:1},
@@ -173,94 +161,73 @@ const DEFAULT_CATS = [
   {id:'plan',label:'기획',color:5,sort_order:5},
   {id:'alba',label:'알바',color:3,sort_order:6},
 ];
-
 function toKey(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 function fromKey(k) { const [y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d); }
 function weekNum(d) { const j=new Date(d.getFullYear(),0,1); return Math.ceil(((d-j)/86400000+j.getDay()+1)/7); }
 function uid() { return Math.random().toString(36).slice(2,10); }
 function getCat(id) { return categories.find(c=>c.id===id)||{label:id,color:6}; }
 function tagStyle(ci) { const p=PALETTE[ci%PALETTE.length]; return `background:${p.bg};color:${p.text};border:0.5px solid ${p.border};`; }
-
 function setSyncState(state) {
-  const dot = document.getElementById('sync-dot');
-  const txt = document.getElementById('sync-text');
-  dot.className = 'sync-dot' + (state==='syncing'?' syncing':state==='error'?' error':'');
-  txt.textContent = state==='ok'?'저장됨':state==='syncing'?'저장 중...':'연결 오류';
+  const dot=document.getElementById('sync-dot'), txt=document.getElementById('sync-text');
+  dot.className='sync-dot'+(state==='syncing'?' syncing':state==='error'?' error':'');
+  txt.textContent=state==='ok'?'저장됨':state==='syncing'?'저장 중...':'연결 오류';
 }
-
 async function sb(method, path, body) {
-  const opts = { method, headers: { ...H, 'Prefer': method==='POST'?'return=representation':'return=representation' } };
-  if (body) opts.body = JSON.stringify(body);
-  const r = await fetch(SUPABASE_URL + path, opts);
-  if (!r.ok) throw new Error(await r.text());
-  const txt = await r.text();
-  return txt ? JSON.parse(txt) : [];
+  const opts={method,headers:{...H,'Prefer':'return=representation'}};
+  if(body) opts.body=JSON.stringify(body);
+  const r=await fetch(SUPABASE_URL+path,opts);
+  if(!r.ok) throw new Error(await r.text());
+  const txt=await r.text();
+  return txt?JSON.parse(txt):[];
 }
-
 async function loadAll() {
   setSyncState('syncing');
   try {
-    const [logs, cats] = await Promise.all([
-      sb('GET', '/rest/v1/work_logs?order=created_at.asc'),
-      sb('GET', '/rest/v1/categories?order=sort_order.asc')
+    const [logs,cats]=await Promise.all([
+      sb('GET','/rest/v1/work_logs?order=created_at.asc'),
+      sb('GET','/rest/v1/categories?order=sort_order.asc')
     ]);
-    categories = cats && cats.length ? cats : DEFAULT_CATS;
-    if (!cats || !cats.length) {
-      await fetch(SUPABASE_URL+'/rest/v1/categories?on_conflict=id', {
-        method:'POST', headers:{...H,'Prefer':'resolution=merge-duplicates'},
-        body:JSON.stringify(DEFAULT_CATS)
-      });
+    categories=cats&&cats.length?cats:DEFAULT_CATS;
+    if(!cats||!cats.length) {
+      await fetch(SUPABASE_URL+'/rest/v1/categories?on_conflict=id',{method:'POST',headers:{...H,'Prefer':'resolution=merge-duplicates'},body:JSON.stringify(DEFAULT_CATS)});
     }
-    data = {};
-    (logs||[]).forEach(l => {
-      if (!data[l.date]) data[l.date] = [];
-      data[l.date].push({id:l.id, title:l.title, body:l.body||'', tags:l.tags||[]});
-    });
+    data={};
+    (logs||[]).forEach(l=>{ if(!data[l.date]) data[l.date]=[]; data[l.date].push({id:l.id,title:l.title,body:l.body||'',tags:l.tags||[]}); });
     setSyncState('ok');
-  } catch(e) {
-    setSyncState('error');
-    console.error(e);
-  }
+  } catch(e){ setSyncState('error'); console.error(e); }
   renderCal(); renderRight();
 }
-
 function renderCal() {
-  const grid = document.getElementById('cal-grid');
-  document.getElementById('cal-title').textContent = `${curYear}년 ${curMonth+1}월`;
-  grid.innerHTML = '';
-  DOWS.forEach(d => { const el=document.createElement('div'); el.className='cal-dow'; el.textContent=d; grid.appendChild(el); });
-  const first = new Date(curYear, curMonth, 1);
-  for (let i=0; i<first.getDay(); i++) { const el=document.createElement('div'); el.className='cal-day empty'; grid.appendChild(el); }
-  const days = new Date(curYear, curMonth+1, 0).getDate();
-  for (let d=1; d<=days; d++) {
-    const dt=new Date(curYear,curMonth,d), key=toKey(dt);
+  const grid=document.getElementById('cal-grid');
+  document.getElementById('cal-title').textContent=`${curYear}년 ${curMonth+1}월`;
+  grid.innerHTML='';
+  DOWS.forEach(d=>{ const el=document.createElement('div'); el.className='cal-dow'; el.textContent=d; grid.appendChild(el); });
+  const first=new Date(curYear,curMonth,1);
+  for(let i=0;i<first.getDay();i++){ const el=document.createElement('div'); el.className='cal-day empty'; grid.appendChild(el); }
+  const days=new Date(curYear,curMonth+1,0).getDate();
+  for(let d=1;d<=days;d++){
+    const dt=new Date(curYear,curMonth,d),key=toKey(dt);
     const el=document.createElement('div'); el.className='cal-day';
-    if (key===toKey(today)) el.classList.add('today');
-    if (key===selectedDate) el.classList.add('selected');
-    if (data[key]&&data[key].length) el.classList.add('has-entry');
+    if(key===toKey(today)) el.classList.add('today');
+    if(key===selectedDate) el.classList.add('selected');
+    if(data[key]&&data[key].length) el.classList.add('has-entry');
     el.textContent=d;
     el.addEventListener('click',()=>{selectedDate=key;renderCal();renderRight();});
     grid.appendChild(el);
   }
   updateStats();
 }
-
 function updateStats() {
   const todayW=weekNum(today); let month=0,week=0,total=0;
   Object.entries(data).forEach(([k,entries])=>{
     if(!entries||!entries.length) return;
     const d=fromKey(k);
-    entries.forEach(()=>{
-      total++;
-      if(d.getFullYear()===today.getFullYear()&&d.getMonth()===today.getMonth()) month++;
-      if(d.getFullYear()===today.getFullYear()&&weekNum(d)===todayW) week++;
-    });
+    entries.forEach(()=>{ total++; if(d.getFullYear()===today.getFullYear()&&d.getMonth()===today.getMonth()) month++; if(d.getFullYear()===today.getFullYear()&&weekNum(d)===todayW) week++; });
   });
   document.getElementById('stat-month').textContent=month;
   document.getElementById('stat-week').textContent=week;
   document.getElementById('stat-total').textContent=total;
 }
-
 function renderRight() {
   const panel=document.getElementById('right-panel');
   const d=fromKey(selectedDate);
@@ -275,7 +242,10 @@ function renderRight() {
       html+=`<div class="entry-card">
         <div class="entry-top">
           <div class="entry-title">${e.title}</div>
-          <button class="entry-del" data-id="${e.id}" data-idx="${i}" aria-label="삭제"><i class="ti ti-x"></i></button>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="entry-edit" data-id="${e.id}" data-idx="${i}" aria-label="수정"><i class="ti ti-pencil"></i></button>
+            <button class="entry-del" data-id="${e.id}" data-idx="${i}" aria-label="삭제"><i class="ti ti-x"></i></button>
+          </div>
         </div>
         ${e.body?`<div class="entry-body">${e.body}</div>`:''}
         <div class="tag-row">${tagsHtml}</div>
@@ -285,7 +255,10 @@ function renderRight() {
   html+=`<button class="add-btn" id="add-btn"><i class="ti ti-plus"></i>기록 추가</button>`;
   panel.innerHTML=html;
   document.getElementById('add-btn').addEventListener('click', openAddModal);
-  panel.querySelectorAll('[data-id]').forEach(btn=>{
+  panel.querySelectorAll('.entry-edit').forEach(btn=>{
+    btn.addEventListener('click',()=>openEditModal(btn.dataset.id, parseInt(btn.dataset.idx)));
+  });
+  panel.querySelectorAll('.entry-del').forEach(btn=>{
     btn.addEventListener('click', async ()=>{
       if(!confirm('삭제할까요?')) return;
       setSyncState('syncing');
@@ -298,7 +271,40 @@ function renderRight() {
     });
   });
 }
-
+function openEditModal(id, idx) {
+  const e=data[selectedDate][idx];
+  const bd=document.createElement('div'); bd.className='modal-backdrop';
+  bd.innerHTML=`<div class="modal">
+    <div class="modal-title">기록 수정</div>
+    <div class="section-label">제목</div>
+    <input type="text" id="m-title" value="${e.title}">
+    <div class="section-label">메모</div>
+    <textarea id="m-body">${e.body||''}</textarea>
+    <div class="section-label">카테고리</div>
+    <div class="tag-select">${categories.map(c=>`<span class="tag-opt${(e.tags||[]).includes(c.id)?' selected':''}" data-tag="${c.id}" style="${tagStyle(c.color)}">${c.label}</span>`).join('')}</div>
+    <div class="modal-btns"><button class="btn-cancel" id="m-cancel">취소</button><button class="btn-save" id="m-save">저장</button></div>
+  </div>`;
+  document.body.appendChild(bd); modal=bd;
+  document.getElementById('m-title').focus();
+  let selectedTags=[...(e.tags||[])];
+  bd.querySelectorAll('.tag-opt').forEach(el=>{
+    el.addEventListener('click',()=>{ const t=el.dataset.tag; if(selectedTags.includes(t)){selectedTags=selectedTags.filter(x=>x!==t);el.classList.remove('selected');}else{selectedTags.push(t);el.classList.add('selected');} });
+  });
+  document.getElementById('m-cancel').addEventListener('click', closeModal);
+  bd.addEventListener('click', ev=>{ if(ev.target===bd) closeModal(); });
+  document.getElementById('m-save').addEventListener('click', async ()=>{
+    const title=document.getElementById('m-title').value.trim();
+    const body=document.getElementById('m-body').value.trim();
+    if(!title){ document.getElementById('m-title').focus(); return; }
+    setSyncState('syncing');
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/work_logs?id=eq.${id}`,{method:'PATCH',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify({title,body,tags:selectedTags})});
+      data[selectedDate][idx]={...data[selectedDate][idx],title,body,tags:selectedTags};
+      setSyncState('ok');
+    } catch(err){ setSyncState('error'); }
+    closeModal(); renderCal(); renderRight();
+  });
+}
 function openAddModal() {
   const bd=document.createElement('div'); bd.className='modal-backdrop';
   bd.innerHTML=`<div class="modal">
@@ -308,31 +314,21 @@ function openAddModal() {
     <div class="section-label">메모</div>
     <textarea id="m-body" placeholder="자세한 내용..."></textarea>
     <div class="section-label">카테고리</div>
-    <div class="tag-select" id="tag-select">
-      ${categories.map(c=>`<span class="tag-opt" data-tag="${c.id}" style="${tagStyle(c.color)}">${c.label}</span>`).join('')}
-    </div>
-    <div class="modal-btns">
-      <button class="btn-cancel" id="m-cancel">취소</button>
-      <button class="btn-save" id="m-save">저장</button>
-    </div>
+    <div class="tag-select">${categories.map(c=>`<span class="tag-opt" data-tag="${c.id}" style="${tagStyle(c.color)}">${c.label}</span>`).join('')}</div>
+    <div class="modal-btns"><button class="btn-cancel" id="m-cancel">취소</button><button class="btn-save" id="m-save">저장</button></div>
   </div>`;
-  document.body.appendChild(bd);
-  modal=bd;
+  document.body.appendChild(bd); modal=bd;
   document.getElementById('m-title').focus();
   let selectedTags=[];
   bd.querySelectorAll('.tag-opt').forEach(el=>{
-    el.addEventListener('click',()=>{
-      const t=el.dataset.tag;
-      if(selectedTags.includes(t)){selectedTags=selectedTags.filter(x=>x!==t);el.classList.remove('selected');}
-      else{selectedTags.push(t);el.classList.add('selected');}
-    });
+    el.addEventListener('click',()=>{ const t=el.dataset.tag; if(selectedTags.includes(t)){selectedTags=selectedTags.filter(x=>x!==t);el.classList.remove('selected');}else{selectedTags.push(t);el.classList.add('selected');} });
   });
   document.getElementById('m-cancel').addEventListener('click', closeModal);
   bd.addEventListener('click', e=>{ if(e.target===bd) closeModal(); });
   document.getElementById('m-save').addEventListener('click', async ()=>{
     const title=document.getElementById('m-title').value.trim();
     const body=document.getElementById('m-body').value.trim();
-    if(!title) { document.getElementById('m-title').focus(); return; }
+    if(!title){ document.getElementById('m-title').focus(); return; }
     setSyncState('syncing');
     try {
       const rows=await sb('POST','/rest/v1/work_logs',{date:selectedDate,title,body,tags:selectedTags});
@@ -344,11 +340,9 @@ function openAddModal() {
     closeModal(); renderCal(); renderRight();
   });
 }
-
 function openSettingsModal() {
   const bd=document.createElement('div'); bd.className='modal-backdrop';
   let tempCats=categories.map(c=>({...c}));
-
   function buildRows() {
     return tempCats.map((c,i)=>`
       <div class="cat-row">
@@ -358,81 +352,80 @@ function openSettingsModal() {
       </div>
       <div class="color-picker-row" id="cp-${i}" style="display:none">
         ${PALETTE.map((p,pi)=>`<div class="color-swatch${c.color===pi?' chosen':''}" data-pi="${pi}" data-ci="${i}" style="background:${p.bg};border-color:${p.border}"></div>`).join('')}
-      </div>
-    `).join('');
+      </div>`).join('');
   }
-
-  function rebuildList() {
-    document.getElementById('cat-list-inner').innerHTML=buildRows();
-    attachEvents();
-  }
-
+  function rebuildList(){ document.getElementById('cat-list-inner').innerHTML=buildRows(); attachEvents(); }
   function attachEvents() {
-    document.querySelectorAll('[data-action="del"]').forEach(btn=>{
-      btn.addEventListener('click',()=>{tempCats.splice(parseInt(btn.dataset.ci),1);rebuildList();});
-    });
-    document.querySelectorAll('[data-action="color"]').forEach(dot=>{
-      dot.addEventListener('click',()=>{
-        const cp=document.getElementById(`cp-${dot.dataset.ci}`);
-        cp.style.display=cp.style.display==='none'?'flex':'none';
-      });
-    });
-    document.querySelectorAll('.color-swatch').forEach(sw=>{
-      sw.addEventListener('click',()=>{
-        tempCats[parseInt(sw.dataset.ci)].color=parseInt(sw.dataset.pi);
-        rebuildList();
-      });
-    });
-    document.querySelectorAll('.cat-name-input').forEach(inp=>{
-      inp.addEventListener('input',()=>{tempCats[parseInt(inp.dataset.ci)].label=inp.value;});
-    });
+    document.querySelectorAll('[data-action="del"]').forEach(btn=>{ btn.addEventListener('click',()=>{ tempCats.splice(parseInt(btn.dataset.ci),1); rebuildList(); }); });
+    document.querySelectorAll('[data-action="color"]').forEach(dot=>{ dot.addEventListener('click',()=>{ const cp=document.getElementById(`cp-${dot.dataset.ci}`); cp.style.display=cp.style.display==='none'?'flex':'none'; }); });
+    document.querySelectorAll('.color-swatch').forEach(sw=>{ sw.addEventListener('click',()=>{ tempCats[parseInt(sw.dataset.ci)].color=parseInt(sw.dataset.pi); rebuildList(); }); });
+    document.querySelectorAll('.cat-name-input').forEach(inp=>{ inp.addEventListener('input',()=>{ tempCats[parseInt(inp.dataset.ci)].label=inp.value; }); });
   }
-
   bd.innerHTML=`<div class="modal">
     <div class="modal-title"><i class="ti ti-adjustments-horizontal" style="font-size:16px;vertical-align:-2px;margin-right:6px"></i>카테고리 관리</div>
     <div class="cat-list" id="cat-list-inner">${buildRows()}</div>
     <button class="add-cat-btn" id="add-cat-btn"><i class="ti ti-plus"></i>카테고리 추가</button>
-    <div class="modal-btns">
-      <button class="btn-cancel" id="s-cancel">취소</button>
-      <button class="btn-save" id="s-save">저장</button>
-    </div>
+    <div class="modal-btns"><button class="btn-cancel" id="s-cancel">취소</button><button class="btn-save" id="s-save">저장</button></div>
   </div>`;
-  document.body.appendChild(bd);
-  modal=bd;
+  document.body.appendChild(bd); modal=bd;
   attachEvents();
-  document.getElementById('add-cat-btn').addEventListener('click',()=>{
-    tempCats.push({id:uid(),label:'새 카테고리',color:6,sort_order:tempCats.length});
-    rebuildList();
-  });
+  document.getElementById('add-cat-btn').addEventListener('click',()=>{ tempCats.push({id:uid(),label:'새 카테고리',color:6,sort_order:tempCats.length}); rebuildList(); });
   bd.addEventListener('click', e=>{ if(e.target===bd) closeModal(); });
   document.getElementById('s-cancel').addEventListener('click', closeModal);
   document.getElementById('s-save').addEventListener('click', async ()=>{
     setSyncState('syncing');
     try {
       const toSave=tempCats.map((c,i)=>({...c,label:c.label.trim()||'이름 없음',sort_order:i}));
-      await fetch(`${SUPABASE_URL}/rest/v1/categories?on_conflict=id`,{
-        method:'POST', headers:{...H,'Prefer':'resolution=merge-duplicates'},
-        body:JSON.stringify(toSave)
-      });
-      const oldIds=categories.map(c=>c.id);
-      const newIds=toSave.map(c=>c.id);
-      for(const id of oldIds.filter(id=>!newIds.includes(id))) {
-        await fetch(`${SUPABASE_URL}/rest/v1/categories?id=eq.${id}`,{method:'DELETE',headers:H});
-      }
-      categories=toSave;
-      setSyncState('ok');
+      await fetch(`${SUPABASE_URL}/rest/v1/categories?on_conflict=id`,{method:'POST',headers:{...H,'Prefer':'resolution=merge-duplicates'},body:JSON.stringify(toSave)});
+      const oldIds=categories.map(c=>c.id), newIds=toSave.map(c=>c.id);
+      for(const id of oldIds.filter(id=>!newIds.includes(id))) { await fetch(`${SUPABASE_URL}/rest/v1/categories?id=eq.${id}`,{method:'DELETE',headers:H}); }
+      categories=toSave; setSyncState('ok');
     } catch(e){ setSyncState('error'); console.error(e); }
     closeModal(); renderRight();
   });
 }
-
+function openStatModal(type) {
+  const todayW=weekNum(today); let filtered=[],title='';
+  if(type==='month'){
+    title=`${today.getFullYear()}년 ${today.getMonth()+1}월 기록`;
+    Object.entries(data).forEach(([k,entries])=>{ const d=fromKey(k); if(d.getFullYear()===today.getFullYear()&&d.getMonth()===today.getMonth()) (entries||[]).forEach(e=>filtered.push({...e,date:k})); });
+  } else if(type==='week'){
+    title='이번 주 기록';
+    Object.entries(data).forEach(([k,entries])=>{ const d=fromKey(k); if(d.getFullYear()===today.getFullYear()&&weekNum(d)===todayW) (entries||[]).forEach(e=>filtered.push({...e,date:k})); });
+  } else {
+    title='전체 기록';
+    Object.entries(data).forEach(([k,entries])=>{ (entries||[]).forEach(e=>filtered.push({...e,date:k})); });
+  }
+  filtered.sort((a,b)=>b.date.localeCompare(a.date));
+  const catCount={};
+  filtered.forEach(e=>{ (e.tags||[]).forEach(t=>{ catCount[t]=(catCount[t]||0)+1; }); });
+  const catSorted=Object.entries(catCount).sort((a,b)=>b[1]-a[1]);
+  const bd=document.createElement('div'); bd.className='modal-backdrop';
+  const catBar=catSorted.map(([id,cnt])=>{ const c=getCat(id); return `<span class="tag" style="${tagStyle(c.color)}">${c.label} <strong>${cnt}</strong></span>`; }).join('');
+  const rows=filtered.map(e=>{ const d=fromKey(e.date); const dateStr=`${d.getMonth()+1}/${d.getDate()}(${DOWS[d.getDay()]})`; const tagsHtml=(e.tags||[]).map(t=>{const c=getCat(t);return `<span class="tag" style="${tagStyle(c.color)};font-size:10px;padding:2px 7px">${c.label}</span>`;}).join(''); return `<div class="stat-row-item"><span class="stat-row-date">${dateStr}</span><div class="stat-row-content"><div class="stat-row-title">${e.title}</div><div class="stat-row-tags">${tagsHtml}</div></div></div>`; }).join('');
+  bd.innerHTML=`<div class="modal" style="width:380px;max-height:75vh">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div class="modal-title" style="margin:0">${title}</div>
+      <span style="font-size:13px;color:var(--text-muted)">${filtered.length}건</span>
+    </div>
+    ${catBar?`<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;padding-bottom:14px;border-bottom:0.5px solid var(--border)">${catBar}</div>`:''}
+    <div style="display:flex;flex-direction:column;gap:8px;overflow-y:auto;max-height:calc(75vh - 120px)">
+      ${rows||'<div style="text-align:center;color:var(--text-muted);padding:24px;font-size:13px">기록 없음</div>'}
+    </div>
+    <div class="modal-btns" style="margin-top:14px"><button class="btn-save" id="s-close">닫기</button></div>
+  </div>`;
+  document.body.appendChild(bd); modal=bd;
+  document.getElementById('s-close').addEventListener('click', closeModal);
+  bd.addEventListener('click', ev=>{ if(ev.target===bd) closeModal(); });
+}
 function closeModal(){ if(modal){modal.remove();modal=null;} }
-
 document.getElementById('settings-btn').addEventListener('click', openSettingsModal);
 document.getElementById('prev-btn').addEventListener('click',()=>{ curMonth--; if(curMonth<0){curMonth=11;curYear--;} renderCal(); });
 document.getElementById('next-btn').addEventListener('click',()=>{ curMonth++; if(curMonth>11){curMonth=0;curYear++;} renderCal(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
-
+document.getElementById('stat-card-month').addEventListener('click',()=>openStatModal('month'));
+document.getElementById('stat-card-week').addEventListener('click',()=>openStatModal('week'));
+document.getElementById('stat-card-total').addEventListener('click',()=>openStatModal('total'));
 loadAll();
 </script>
 </body>
